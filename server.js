@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 mongoose.Promise = global.Promise;
 
 
-app.get('/posts', (req, res) => {
+app.get('/blogposts', (req, res) => {
   BlogPost
     .find()
     .exec()
@@ -27,7 +27,7 @@ app.get('/posts', (req, res) => {
     });
 });
 
-app.get('/posts/:id', (req, res) => {
+app.get('/blogposts/:id', (req, res) => {
   BlogPost
     .findById(req.params.id)
     .exec()
@@ -38,7 +38,7 @@ app.get('/posts/:id', (req, res) => {
     });
 });
 
-app.post('/posts', (req, res) => {
+app.post('/blogposts', (req, res) => {
   const requiredFields = ['title', 'content', 'author'];
   for (let i=0; i<requiredFields.length; i++) {
     const field = requiredFields[i];
@@ -64,7 +64,7 @@ app.post('/posts', (req, res) => {
 });
 
 
-app.delete('/posts/:id', (req, res) => {
+app.delete('/blogposts/:id', (req, res) => {
   BlogPost
     .findByIdAndRemove(req.params.id)
     .exec()
@@ -78,7 +78,7 @@ app.delete('/posts/:id', (req, res) => {
 });
 
 
-app.put('/posts/:id', (req, res) => {
+app.put('/blogposts/:id', (req, res) => {
   if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
     res.status(400).json({
       error: 'Request path id and request body id values must match'
